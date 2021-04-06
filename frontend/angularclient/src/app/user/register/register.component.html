@@ -1,0 +1,86 @@
+<div class="create-account-container">
+    <div class="create-account-box">
+        <span class="title">
+            Create account
+        </span>
+        <div>
+            <div class="radio-buttons">
+                <div class="pr">
+                    <input type="radio" id="admin" name="gender" value="ADMIN" [(ngModel)]="account.user.role">
+                <label for="admin">ADMIN</label><br>
+                </div>
+                <div>
+                    <input type="radio" id="client" name="gender" value="CLIENT" [(ngModel)]="account.user.role">
+                <label for="client">CLIENT</label><br>
+                </div>
+            </div>
+            <form [formGroup]="registerForm" (submit)="register()">
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Username </mat-label>
+                        <input matInput formControlName="username" required>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Password </mat-label>
+                        <input matInput formControlName="password" required>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger err">
+                            <div *ngIf="password.errors.minlength">
+                              Password must be at least 8 characters long.
+                            </div>
+                        </div>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>FirstName </mat-label>
+                        <input matInput formControlName="firstName" required>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>LastName </mat-label>
+                        <input matInput formControlName="lastName" required>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Email </mat-label>
+                        <input matInput formControlName="email" placeholder="example: example@yahoo.com" required>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger err">
+                            <div *ngIf="email.errors.email">
+                              Email must be a valid email address.
+                            </div>
+                        </div>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Phone </mat-label>
+                        <input matInput formControlName="phone" placeholder="example: 0740123456" required>
+                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger err">
+                            <div *ngIf="phone.errors.pattern">
+                              Phone must be a valid phone number.
+                            </div>
+                        </div>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Age </mat-label>
+                        <input matInput formControlName="age" required>
+                        <div *ngIf="age.invalid && (age.dirty || age.touched)" class="alert alert-danger err">
+                            <div *ngIf="age.errors.pattern">
+                                Age must be a number between 10 and 99.
+                            </div>
+                        </div>
+                    </mat-form-field> 
+                </div>
+                <div class="d-flex justify-content-center mt-6">
+                    <button class="button-submit btn-lg btn-block" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

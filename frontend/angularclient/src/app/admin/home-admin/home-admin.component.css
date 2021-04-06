@@ -1,0 +1,11 @@
+.home-admin-container{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.pr{
+    padding-top:20px;
+    padding-right: 20px;
+}

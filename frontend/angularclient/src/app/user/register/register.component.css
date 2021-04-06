@@ -1,0 +1,74 @@
+.create-account-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    border-color: rgb(195, 159, 144);
+    width: 100%;
+    padding-bottom: 120px;
+    background-image: url('../../../assets/login-background.jpg');
+    background-size: cover;
+    text-align: center;
+}
+
+.radio-buttons{
+    display:inline-flex;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.pr{
+    padding-right: 40px;
+}
+
+.create-account-box {
+    justify-content: center;
+    font-family: SourceSansPro-Bold;
+    min-width: 500px;
+    background: rgba(253, 250, 250, 0.945);
+    border-radius: 10px;
+    box-shadow: 0 3px 20px 0 rgba(187, 61, 61, 0.1);
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 60px;
+    padding-top: 30px;
+}
+
+.title{
+    display: block;
+    font-size: 30px;
+    color: rgb(50, 56, 20);
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.input-container{
+    font-size: 13px;
+    display:block;
+}
+
+.form-control{
+    border-radius: 20px;
+}
+
+.button-submit:hover {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+.button-submit{
+    color: rgb(50, 56, 20);
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    background: rgb(247, 231, 223);
+    border: rgb(241, 215, 203);
+    border-radius: 5px;
+    outline:none;
+}
+
+.err{
+    color:rgb(153, 26, 26);
+    text-align: center;
+    padding-top: 10px;
+}

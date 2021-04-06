@@ -1,0 +1,30 @@
+<div class="login-container">
+    <div class="login-box">
+        <span class="title">
+            Login
+        </span>
+        <div>
+            <form [formGroup]="loginForm" (submit)="login()">
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Username </mat-label>
+                        <input matInput formControlName="username" required>
+                    </mat-form-field> 
+                </div>
+                <div class="input-container">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Password </mat-label>
+                        <input matInput type="password" formControlName="password" required>
+                    </mat-form-field> 
+                </div>
+            </form>
+
+            <div class="create-account">
+                <a [routerLink]="" (click)="register()">Create account</a>
+            </div>
+            <div class="d-flex justify-content-center mt-0">
+                <button class="button-login" type="submit" (click)="login()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

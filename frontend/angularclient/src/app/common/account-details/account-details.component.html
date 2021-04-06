@@ -1,0 +1,41 @@
+<div class="card my-5">
+    <div class="card-body center-container pt">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+            <td>
+              <input [(ngModel)]="account.username" (change)="updateUsername(account)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.password" (change)="updatePassword(account)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.user.firstName" (change)="updateFirstName(account.user)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.user.lastName" (change)="updateLastName(account.user)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.user.email" (change)="updateEmail(account.user)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.user.phone" (change)="updatePhone(account.user)"/>
+            </td>
+            <td>
+              <input [(ngModel)]="account.user.age" (change)="updateAge(account.user)"/>
+            </td>
+            <!--<td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>-->
+        </tbody>
+      </table>
+    </div>
+  </div>
