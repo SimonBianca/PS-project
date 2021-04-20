@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder:FormBuilder,private snackBar:MatSnackBar) { 
     this.account=new Account();
     this.account.user=new User();
+    this.account.user.role='CLIENT';
 
   }
 

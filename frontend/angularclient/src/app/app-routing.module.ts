@@ -10,6 +10,7 @@ import { LoginComponent } from './user/login/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ListOfServicesComponent } from './client/list-of-services/list-of-services.component';
 import { AccountDetailsComponent } from './common/account-details/account-details.component';
+import { AddAppointmentComponent } from './client/add-appointment/add-appointment.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/login',pathMatch:'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'admin/services/add',component:AddServiceComponent, canActivate: [AuthGuard]},
   {path:'client/services',component:ListOfServicesComponent,canActivate:[AuthGuard]},
   {path:'client/details',component:AccountDetailsComponent,canActivate:[AuthGuard]},
-  {path:'admin/details',component:AccountDetailsComponent,canActivate:[AuthGuard]}
+  {path:'admin/details',component:AccountDetailsComponent,canActivate:[AuthGuard]},
+  {path:'client/appointment',component:AddAppointmentComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

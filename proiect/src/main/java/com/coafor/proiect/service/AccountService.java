@@ -1,6 +1,7 @@
 package com.coafor.proiect.service;
 
 import com.coafor.proiect.model.Account;
+import com.coafor.proiect.model.Appointment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public interface AccountService {
     Account findByFirstNameAndLastName(String firstName,String lastName);
     List<Account> findAll();
     Account findById(String id);
+    Account addAppointment(Account account, Appointment appointment);
 
 }

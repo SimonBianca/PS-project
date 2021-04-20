@@ -19,6 +19,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {  MatButtonModule } from '@angular/material/button';
 import { ListOfServicesComponent } from './client/list-of-services/list-of-services.component';
 import { AccountDetailsComponent } from './common/account-details/account-details.component';
+import { AddAppointmentComponent } from './client/add-appointment/add-appointment.component';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import { AppHeaderComponent } from './common/app-header/app-header.component';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +36,9 @@ import { AccountDetailsComponent } from './common/account-details/account-detail
     ServiceListComponent,
     AddServiceComponent,
     ListOfServicesComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    AddAppointmentComponent,
+    AppHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +50,11 @@ import { AccountDetailsComponent } from './common/account-details/account-detail
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatTableModule
 
   ],
   providers: [],

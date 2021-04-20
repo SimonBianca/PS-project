@@ -6,11 +6,11 @@
         <div>
             <div class="radio-buttons">
                 <div class="pr">
-                    <input type="radio" id="admin" name="gender" value="ADMIN" [(ngModel)]="account.user.role">
+                    <input type="radio" id="admin" name="type" value="ADMIN" [(ngModel)]="account.user.role" >
                 <label for="admin">ADMIN</label><br>
                 </div>
                 <div>
-                    <input type="radio" id="client" name="gender" value="CLIENT" [(ngModel)]="account.user.role">
+                    <input type="radio" id="client" name="type" value="CLIENT" [(ngModel)]="account.user.role" checked>
                 <label for="client">CLIENT</label><br>
                 </div>
             </div>

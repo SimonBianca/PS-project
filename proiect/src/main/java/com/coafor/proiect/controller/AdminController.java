@@ -4,6 +4,7 @@ package com.coafor.proiect.controller;
 import com.coafor.proiect.model.Account;
 import com.coafor.proiect.model.Service;
 import com.coafor.proiect.model.User;
+import com.coafor.proiect.repository.ServiceRepository;
 import com.coafor.proiect.service.AccountService;
 import com.coafor.proiect.service.ServiceService;
 import com.coafor.proiect.service.UserService;
@@ -26,6 +27,9 @@ public class AdminController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public ServiceRepository serviceRepository;
 
     @GetMapping("/accounts")
     public ResponseEntity getAllAccounts(){

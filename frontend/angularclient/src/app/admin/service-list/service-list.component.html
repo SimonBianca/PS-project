@@ -1,9 +1,8 @@
-<div class="card my-5">
-    <div class="card-body center-container pt">
+<div class="service-container">
+    <div class="service-box pt">
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Duration</th>
@@ -11,7 +10,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let service of services;let i=index">
-            <td>{{ service.id }}</td>
             <td>
               <input [(ngModel)]="service.name" (change)="updateName(service)"/>
             </td>
@@ -22,13 +20,15 @@
               <input [(ngModel)]="service.duration" (change)="updateDuration(service)"/> 
             </td>
             <td>
-              <button type="button" class="btn btn-info" (click)="deleteService(service,i)">Delete service</button>
+              <span (click)="deleteService(service,i)">
+                <span class="material-icons pl-3 md-20">cancel</span>
+            </span>
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="button-container" >
+        <button type="button" class="button-add btn-lg btn-block" (click)="goToAddService()">Add service</button>
+      </div>
   </div>
-</div>
-<div class="center-container pt" >
-  <button type="button" class="btn btn-info" (click)="goToAddService()">Add service</button>
 </div>

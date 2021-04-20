@@ -22,6 +22,10 @@ export class HomeClientComponent implements OnInit {
     this.router.navigate(["client/details"]);
   }
 
+  goToAppointment():void{
+    this.router.navigate(["client/appointment"]);
+  }
+
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     localStorage.removeItem('token');

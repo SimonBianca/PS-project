@@ -11,7 +11,6 @@ import { ServicesService } from 'src/app/service/services.service';
   styleUrls: ['./add-service.component.css']
 })
 export class AddServiceComponent implements OnInit {
-  serviceErrorMessage:string;
   service:Service;
   serviceForm:FormGroup;
 
@@ -23,8 +22,8 @@ export class AddServiceComponent implements OnInit {
   ngOnInit(): void {
     this.serviceForm=this.formBuilder.group({
       name:[null,Validators.required],
-      price:[null,Validators.required],
-      duration:[null,Validators.required]
+      price:[null,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1}$")]],
+      duration:[null,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1}$")]]
     })
   }
 
@@ -40,8 +39,15 @@ export class AddServiceComponent implements OnInit {
     this.service.duration=this.serviceForm.value.duration;
     this.servicesService.addService(this.service).subscribe(
     data => {
-      this.service = data;
-      this.router.navigate(["admin/services"]);
+      if(data!=null){
+        this.service = data;
+        this.router.navigate(["admin/services"]);
+      }
+      if(data==null){
+        this.snackBar.open("This service already exists!", "Close",{
+          duration:2000
+        });
+      }
     },
     error =>this.snackBar=error
     );

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Account } from '../model/account';
 import { userRoleEnum } from '../model/userRole.enum';
 import { User } from '../model/user';
+import { Appointment } from '../model/appointment';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +107,8 @@ export class UserService {
     }
   }
 
-
+  addAppointment(appointment:Appointment):Observable<Appointment>{
+    return this.http.post<Appointment>(`${this.baseURLClient}/appointment`,appointment);
+  }
 }
 

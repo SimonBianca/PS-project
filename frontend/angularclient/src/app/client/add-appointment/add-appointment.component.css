@@ -1,12 +1,13 @@
-.add-service-container {
+.add-appointment-container {
     display: flex;
     justify-content: center;
-    padding-top: 80px;
-    border-color: rgb(195, 159, 144);
+    padding-top: 100px;
+    border-color:rgb(205, 140, 144);
     width: 100%;
-    height: 66vh;
+    height: 65vh;
     background-image: url('../../../assets/appointment.jpg');
-    padding-bottom: 120px;
+    background-size: cover;
+    padding-bottom: 100px;
     background-size: cover;
     text-align: center;
 }
@@ -21,18 +22,18 @@
     padding-right: 40px;
 }
 
-.add-service-box {
+.add-appointment-box {
     justify-content: center;
     font-family: SourceSansPro-Bold;
     min-width: 300px;
     min-height: 100px;
-    height: 40vh;
+    height: 45vh;
     background: rgb(253, 250, 250);
     border-radius: 10px;
     box-shadow: 0 3px 20px 0 rgba(187, 61, 61, 0.1);
     padding-right: 40px;
     padding-left: 40px;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
     padding-top: 30px;
 }
 
@@ -45,13 +46,18 @@
     padding-bottom: 20px;
 }
 
+.example-full-width{
+    width: 200px;
+}
+
 .input-container{
-    font-size: 13px;
+    font-size: 14px;
     display:block;
 }
 
 .form-control{
-    border-radius: 20px;
+    border-radius: 30px;
+    width: 30px;
 }
 
 .button-submit:hover {
@@ -64,12 +70,17 @@
     width: 100px;
     height: 40px;
     font-size: 20px;
-    background: rgb(213 152 162);
+    background: rgb(216, 153, 157);
     border: rgb(241, 215, 203);
     border-radius: 5px;
     outline:none;
 }
 
-.pt2{
-    padding-top: 15px;
-}
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+
+  .pt2{
+      padding-top: 30px;
+  }

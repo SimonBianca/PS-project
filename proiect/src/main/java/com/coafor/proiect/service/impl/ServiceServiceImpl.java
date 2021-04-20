@@ -15,9 +15,13 @@ public class ServiceServiceImpl implements ServiceService {
     private ServiceRepository serviceRepository;
 
     public Service addService(String name, float price, int duration){
-        Service service=new Service(null,name,price,duration);
-        service=serviceRepository.save(service);
-        return service;
+        Service serv=serviceRepository.findFirstByName(name);
+        if(serv==null){
+            Service service=new Service(null,name,price,duration);
+            service=serviceRepository.save(service);
+            return service;
+        }
+        return null;
     }
 
     public void deleteService(Service service){

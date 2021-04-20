@@ -4,10 +4,11 @@ import com.coafor.proiect.model.Account;
 import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
 import com.coafor.proiect.repository.AppointmentRepository;
+import com.coafor.proiect.service.AccountService;
 import com.coafor.proiect.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -16,9 +17,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public Appointment addAppointment(LocalDateTime date, Account account, List<Service> services){
+    @Autowired
+    private AccountService accountService;
+
+    public Appointment addAppointment(Date date, Account account, List<Service> services){
         Appointment appointment=new Appointment(null,date,account,services);
-        appointmentRepository.save(appointment);
+        appointment=appointmentRepository.save(appointment);
+        accountService.addAppointment(account,appointment);
         return appointment;
     }
 
@@ -34,7 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return (List<Appointment>)appointmentRepository.findAllByAccount(account);
     }
 
-    public List<Appointment> findAllByDate(LocalDateTime date){
+    public List<Appointment> findAllByDate(Date date){
         return (List<Appointment>)appointmentRepository.findAllByDate(date);
     }
 

@@ -1,9 +1,11 @@
 package com.coafor.proiect.controller;
 
 import com.coafor.proiect.model.Account;
+import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
 import com.coafor.proiect.model.User;
 import com.coafor.proiect.service.AccountService;
+import com.coafor.proiect.service.AppointmentService;
 import com.coafor.proiect.service.ServiceService;
 import com.coafor.proiect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class ClientController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public AppointmentService appointmentService;
 
     @GetMapping("/services")
     public ResponseEntity getAllServices(){
@@ -78,4 +83,12 @@ public class ClientController {
         User usr=userService.updateUserAge(user,user.getAge());
         return ResponseEntity.ok().body(usr);
     }
+
+    @PostMapping("/appointment")
+    public ResponseEntity addAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.addAppointment(appointment.getDate(),appointment.getAccount(),appointment.getServices());
+        return ResponseEntity.ok().body(app);
+    }
+
+
 }
