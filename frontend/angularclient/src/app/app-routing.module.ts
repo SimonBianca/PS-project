@@ -11,6 +11,12 @@ import { RegisterComponent } from './user/register/register.component';
 import { ListOfServicesComponent } from './client/list-of-services/list-of-services.component';
 import { AccountDetailsComponent } from './common/account-details/account-details.component';
 import { AddAppointmentComponent } from './client/add-appointment/add-appointment.component';
+import { OldAppointmentsComponent } from './client/old-appointments/old-appointments.component';
+import { FutureAppointmentsComponent } from './client/future-appointments/future-appointments.component';
+import { OldAppointmetsListComponent } from './admin/old-appointmets-list/old-appointmets-list.component';
+import { FutureAppointmetsListComponent } from './admin/future-appointmets-list/future-appointmets-list.component';
+import { OnWaitingAppointmentsComponent } from './admin/on-waiting-appointments/on-waiting-appointments.component';
+import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointments-list/on-waiting-appointments-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/login',pathMatch:'full'},
@@ -24,7 +30,13 @@ const routes: Routes = [
   {path:'client/services',component:ListOfServicesComponent,canActivate:[AuthGuard]},
   {path:'client/details',component:AccountDetailsComponent,canActivate:[AuthGuard]},
   {path:'admin/details',component:AccountDetailsComponent,canActivate:[AuthGuard]},
-  {path:'client/appointment',component:AddAppointmentComponent,canActivate:[AuthGuard]}
+  {path:'client/appointment',component:AddAppointmentComponent,canActivate:[AuthGuard]},
+  {path:'client/old-appointments',component:OldAppointmentsComponent,canActivate:[AuthGuard]},
+  {path:'client/future-appointments',component:FutureAppointmentsComponent,canActivate:[AuthGuard]},
+  {path:'admin/old-appointments',component:OldAppointmetsListComponent,canActivate:[AuthGuard]},
+  {path:'admin/future-appointments',component:FutureAppointmetsListComponent,canActivate:[AuthGuard]},
+  {path:'admin/on-waiting-appointments',component:OnWaitingAppointmentsComponent,canActivate:[AuthGuard]},
+  {path:'client/on-waiting-appointments',component:OnWaitingAppointmentsListComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

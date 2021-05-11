@@ -13,6 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -87,6 +91,57 @@ public class ClientController {
     @PostMapping("/appointment")
     public ResponseEntity addAppointment(@RequestBody Appointment appointment){
         Appointment app=appointmentService.addAppointment(appointment.getDate(),appointment.getAccount(),appointment.getServices());
+        return ResponseEntity.ok().body(app);
+    }
+
+    @GetMapping("/old-appointments")
+    public ResponseEntity getOldAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsLessThanAndStatus(account,date,status));
+    }
+
+    @GetMapping("/future-appointments")
+    public ResponseEntity getFutureAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsGreaterThanEqualAndStatus(account,date,status));
+    }
+
+    @GetMapping("/on-waiting-appointments")
+    public ResponseEntity getoOnWaitingAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsGreaterThanEqualAndStatus(account,date,status));
+    }
+
+    @PutMapping("/on-waiting-appointments/accept")
+    public ResponseEntity acceptAppointment(@RequestBody Appointment appointment) throws ParseException {
+        Appointment app=appointmentService.acceptAppointment(appointment);
+        return ResponseEntity.ok().body(app);
+    }
+
+    @PutMapping("/on-waiting-appointments/refuse")
+    public ResponseEntity refuseAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.refuseAppointment(appointment);
         return ResponseEntity.ok().body(app);
     }
 

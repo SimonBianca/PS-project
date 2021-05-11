@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Appointment } from 'src/app/model/appointment';
@@ -19,8 +19,12 @@ export class AddAppointmentComponent implements OnInit {
   date:Date;
   minDate:Date;
   servicesList:string;
+  dateForm:FormGroup;
+
   constructor(private router:Router,private userService:UserService,
-    private snackBar:MatSnackBar, private servicesService:ServicesService) {
+    private snackBar:MatSnackBar, private servicesService:ServicesService,
+    private formBuilder:FormBuilder) {
+
       this.appointment=new Appointment();
       const currentYear=new Date().getFullYear();
       const currentMonth=new Date().getMonth();
@@ -30,6 +34,9 @@ export class AddAppointmentComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.dateForm=this.formBuilder.group({
+      date:["",Validators.required]
+    })
     this.servicesService.getAllServices().subscribe(data => {
       this.services = data;
     },
@@ -40,6 +47,12 @@ export class AddAppointmentComponent implements OnInit {
   }
 
   addAppointment():void{
+    if(this.dateForm.invalid){
+      this.snackBar.open("Please choose a date!", "Close",{
+        duration:2000
+      });
+      return;
+    }
     var that=this;
     this.appointment.services=[];
     this.servicesControl.value.forEach(function(item){
@@ -47,13 +60,20 @@ export class AddAppointmentComponent implements OnInit {
         that.appointment.services.push(that.servicesService.getServiceByName(that.services,item));
       }
     });
-    this.appointment.date=this.date;
+    this.appointment.date=this.dateForm.value.date;
     this.userService.getAccountById(localStorage.getItem('id')).subscribe(res => {
       this.appointment.account = res;
       this.userService.addAppointment(this.appointment).subscribe(
         data => {
-          this.appointment = data;
-          this.router.navigate(["client"]);
+          if(data==null){
+            this.snackBar.open("There is an appointment on this date, plese choose another date!", "Close",{
+              duration:4000
+            });
+          }
+          else{
+            this.appointment = data;
+            this.router.navigate(["client"]);
+          }
         },
         error => this.snackBar=error
       );

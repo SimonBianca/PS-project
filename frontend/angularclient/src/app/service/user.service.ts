@@ -110,5 +110,60 @@ export class UserService {
   addAppointment(appointment:Appointment):Observable<Appointment>{
     return this.http.post<Appointment>(`${this.baseURLClient}/appointment`,appointment);
   }
+
+  getOldAppointments(id:string):Observable<Appointment[]>{
+    let params=new HttpParams().set('id',id).set('status',"ACCEPTED");
+    if(localStorage.getItem('role')==userRoleEnum.Admin){
+      return this.http.get<Appointment[]>(`${this.baseURLAdmin}/old-appointments`);
+    }
+    else{
+      return this.http.get<Appointment[]>(`${this.baseURLClient}/old-appointments`,{params:params});
+    }
+  }
+
+  getFutureAppointments(id:string):Observable<Appointment[]>{
+    let params=new HttpParams().set('id',id).set('status',"ACCEPTED");
+    if(localStorage.getItem('role')==userRoleEnum.Admin){
+      return this.http.get<Appointment[]>(`${this.baseURLAdmin}/future-appointments`);
+    }
+    else{
+      return this.http.get<Appointment[]>(`${this.baseURLClient}/future-appointments`,{params:params});
+    }
+  }
+
+  refuseAppointment(appointment:Appointment):Observable<Appointment>{
+    if(localStorage.getItem('role')==userRoleEnum.Admin){
+      return this.http.put<Appointment>(`${this.baseURLAdmin}/on-waiting-appointments/refuse`,appointment);
+    }
+    else{
+      return this.http.put<Appointment>(`${this.baseURLClient}/on-waiting-appointments/refuse`,appointment);
+    }
+  }
+
+  acceptAppointment(appointment:Appointment):Observable<Appointment>{
+    if(localStorage.getItem('role')==userRoleEnum.Admin){
+      return this.http.put<Appointment>(`${this.baseURLAdmin}/on-waiting-appointments/accept`,appointment);
+    }
+    else{
+      return this.http.put<Appointment>(`${this.baseURLClient}/on-waiting-appointments/accept`,appointment);
+    }
+  }
+
+  getOnWaitingAppointments(id:string):Observable<Appointment[]>{
+    let params=new HttpParams().set('id',id).set('status',"WAITING");
+    if(localStorage.getItem('role')==userRoleEnum.Admin){
+      return this.http.get<Appointment[]>(`${this.baseURLAdmin}/on-waiting-appointments`);
+    }
+    else{
+      return this.http.get<Appointment[]>(`${this.baseURLClient}/on-waiting-appointments`,{params:params});
+    }
+  }
+
+  getAppointmentAccount(appointment:Appointment):Observable<Account>{
+      return this.http.put<Account>(`${this.baseURLAdmin}/appointment/account`,appointment);
+  }
+  
+
+
 }
 

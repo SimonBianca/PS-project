@@ -6,5 +6,6 @@ export class Appointment {
     date: Date;
     account: Account;
     services: Service[];
+    status:string;
 
 }

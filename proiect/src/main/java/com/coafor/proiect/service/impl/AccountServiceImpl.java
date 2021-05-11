@@ -60,6 +60,11 @@ public class AccountServiceImpl implements AccountService {
 
     public Account updateUsername(Account account,String username){
         Account updatedAccount=accountRepository.findById(account.getId()).get();
+        if(accountRepository.findAllByUsername(username).size()>=1){
+            updatedAccount.setUsername("");
+            accountRepository.save(updatedAccount);
+            return null;
+        }
         updatedAccount.setUsername(username);
         return accountRepository.save(updatedAccount);
     }
@@ -99,6 +104,10 @@ public class AccountServiceImpl implements AccountService {
         appointments.add(appointment);
         account.setAppointments(appointments);
         return accountRepository.save(account);
+    }
+
+    public Account findByAppointmentsContaining(Appointment appointment){
+        return (Account) accountRepository.findByAppointmentsContaining(appointment);
     }
 
 

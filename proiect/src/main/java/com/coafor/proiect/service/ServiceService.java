@@ -1,5 +1,6 @@
 package com.coafor.proiect.service;
 
+import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -15,4 +16,5 @@ public interface ServiceService {
     Service findById(Long id);
     Service findByName(String name);
     List<Service> findAll();
+    int getNumberOfServicesByName(String name);
 }

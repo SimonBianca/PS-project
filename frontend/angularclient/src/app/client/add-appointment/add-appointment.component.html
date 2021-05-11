@@ -4,14 +4,16 @@
             Create appointment
         </span>
         <div class="card my-5">
+            <form [formGroup]="dateForm">
                 <div class="input-container"> 
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Choose a date</mat-label>
-                        <input matInput [min]="minDate" [matDatepicker]="date" (dateInput)="inputEvent($event)" (dateChange)="changeEvent($event)">
+                        <input matInput [min]="minDate" formControlName="date" [matDatepicker]="date" (dateInput)="inputEvent($event)" (dateChange)="changeEvent($event)" required>
                         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                         <mat-datepicker #date></mat-datepicker>
                     </mat-form-field>
                 </div>
+            </form>
                 <div class="input-container">
                     <mat-form-field appearance="fill">
                         <mat-label>Services</mat-label>

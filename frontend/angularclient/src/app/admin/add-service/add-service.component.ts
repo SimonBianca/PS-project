@@ -22,8 +22,8 @@ export class AddServiceComponent implements OnInit {
   ngOnInit(): void {
     this.serviceForm=this.formBuilder.group({
       name:[null,Validators.required],
-      price:[null,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1}$")]],
-      duration:[null,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1}$")]]
+      price:[null,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1,2}$")]],
+      duration:[null,[Validators.required,Validators.pattern("[2-9]{1}[0-9]{1,2}$")]]
     })
   }
 

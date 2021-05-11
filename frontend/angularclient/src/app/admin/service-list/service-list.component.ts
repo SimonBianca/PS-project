@@ -1,5 +1,6 @@
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Service } from 'src/app/model/service';
@@ -12,6 +13,7 @@ import { ServicesService } from 'src/app/service/services.service';
 })
 export class ServiceListComponent implements OnInit {
   services:Service[];
+  servicesForm:FormGroup=new FormGroup({});
   constructor(private servicesService:ServicesService,private router:Router,
     private snackBar:MatSnackBar) {
    }
@@ -19,6 +21,14 @@ export class ServiceListComponent implements OnInit {
   ngOnInit(): void {
     this.servicesService.getAllServices().subscribe(data => {
       this.services = data;
+      var that=this;
+      this.services.forEach(function(item){
+        that.servicesForm.addControl(item.id.toString(),new FormGroup({
+          name:new FormControl(item.name,[Validators.required]),
+          price:new FormControl(item.price,[Validators.required,Validators.pattern("[1-9]{1}[0-9]{1,2}$")]),
+          duration:new FormControl(item.duration,[Validators.required,,Validators.pattern("[2-9]{1}[0-9]{1,2}$")])
+        }));
+      });
     },
     error => {
       console.log(error);
@@ -29,48 +39,40 @@ export class ServiceListComponent implements OnInit {
     this.router.navigate(["admin/services/add"]);
   }
 
-  updateName(updatedService:Service):void{ 
-    if(this.servicesService.getNumberOfServicesByName(this.services,updatedService.name)>=2){
-      this.snackBar.open("This service already exists!", "Close");
-      updatedService.name="";
+  updateName(updatedService:Service,formGroup:FormGroup):void{ 
+    updatedService.name=formGroup.controls.name.value;
+    if(!formGroup.valid){
+      return;
     }
     this.servicesService.updateName(updatedService).subscribe(
-  
       response => {
+        if(response==null){
+          this.snackBar.open("This service already exists!", "Close",{
+            duration:2000
+          });
+          formGroup.controls.name.setValue("");
+        }
       },
-      error => console.log(error)
+      error => this.snackBar=error
     );
   }
 
-  updatePrice(updatedService:Service):void{
-    if(_isNumberValue(updatedService.price)){
-      if(updatedService.price<10 || updatedService.price >300){
-        this.snackBar.open("Price must be between 10 and 300!", "Close");
-        updatedService.price=0;
-      }
-    }
-    else{
-      this.snackBar.open("Price must be a number between 10 and 300!", "Close");
-        updatedService.price=0;
+  updatePrice(updatedService:Service,formGroup:FormGroup):void{
+    updatedService.price=formGroup.controls.price.value;
+    if(!formGroup.valid){
+      return;
     }
     this.servicesService.updatePrice(updatedService).subscribe(
       response => {
-        
       },
       error => console.log(error)
     );
   }
 
-  updateDuration(updatedService:Service):void{
-    if(_isNumberValue(updatedService.duration)){
-      if(updatedService.duration<15 || updatedService.duration >120){
-        this.snackBar.open("Duration must be between 15 and 120!", "Close");
-        updatedService.duration=0;
-      }
-    }
-    else{
-      this.snackBar.open("Duration must be a number between 15 and 120!", "Close");
-        updatedService.duration=0;
+  updateDuration(updatedService:Service,formGroup:FormGroup):void{
+    updatedService.duration=formGroup.controls.duration.value;
+    if(!formGroup.valid){
+      return;
     }
     this.servicesService.updateDuration(updatedService).subscribe(
       response => {
@@ -81,12 +83,27 @@ export class ServiceListComponent implements OnInit {
 
   deleteService(service:Service,index:number):void{
     this.servicesService.deleteService(service.id).subscribe(
-  
       response => {
         this.services.splice(index,1)
       },
       error => console.log(error)
     );
+  }
+
+  getFormGroup(id:number){
+    return (this.servicesForm.controls[id.toString()] as FormGroup);
+  }
+
+  getNameFormControl(id:number){
+    return this.getFormGroup(id).controls.name as FormControl;
+  }
+
+  getPriceFormControl(id:number){
+    return this.getFormGroup(id).controls.price as FormControl;
+  }
+
+  getDurationFormControl(id:number){
+    return this.getFormGroup(id).controls.duration as FormControl;
   }
 
 }

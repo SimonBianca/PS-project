@@ -26,6 +26,18 @@ export class HomeClientComponent implements OnInit {
     this.router.navigate(["client/appointment"]);
   }
 
+  goToOldAppointments():void{
+    this.router.navigate(["client/old-appointments"]);
+  }
+
+  goToFutureAppointments():void{
+    this.router.navigate(["client/future-appointments"]);
+  }
+
+  goToOnWaitingAppointments():void{
+    this.router.navigate(["client/on-waiting-appointments"]);
+  }
+
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     localStorage.removeItem('token');
@@ -33,5 +45,7 @@ export class HomeClientComponent implements OnInit {
     localStorage.removeItem('role');
     this.router.navigate(["login"]);
   }
+
+  
 
 }

@@ -25,6 +25,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { AppHeaderComponent } from './common/app-header/app-header.component';
 import {MatTableModule} from '@angular/material/table';
+import { OldAppointmentsComponent } from './client/old-appointments/old-appointments.component';
+import { FutureAppointmentsComponent } from './client/future-appointments/future-appointments.component';
+import { OldAppointmetsListComponent } from './admin/old-appointmets-list/old-appointmets-list.component';
+import { FutureAppointmetsListComponent } from './admin/future-appointmets-list/future-appointmets-list.component';
+import { OnWaitingAppointmentsComponent } from './admin/on-waiting-appointments/on-waiting-appointments.component';
+import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointments-list/on-waiting-appointments-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +44,13 @@ import {MatTableModule} from '@angular/material/table';
     ListOfServicesComponent,
     AccountDetailsComponent,
     AddAppointmentComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    OldAppointmentsComponent,
+    FutureAppointmentsComponent,
+    OldAppointmetsListComponent,
+    FutureAppointmetsListComponent,
+    OnWaitingAppointmentsComponent,
+    OnWaitingAppointmentsListComponent
   ],
   imports: [
     BrowserModule,

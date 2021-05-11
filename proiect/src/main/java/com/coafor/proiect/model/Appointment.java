@@ -28,4 +28,6 @@ public class Appointment {
     @OneToMany
     private List<Service> services;
 
+    private String status="WAITING";
+
 }

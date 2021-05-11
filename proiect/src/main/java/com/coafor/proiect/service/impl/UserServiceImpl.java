@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
 
     public User updateUserPhone(User user, String phone){
         User updatedUser=userRepository.findById(user.getId()).get();
+        if(userRepository.findAllByPhone(phone).size()>=1){
+            updatedUser.setPhone("");
+            userRepository.save(updatedUser);
+            return null;
+        }
         updatedUser.setPhone(phone);
         userRepository.save(updatedUser);
         return updatedUser;
@@ -56,6 +61,11 @@ public class UserServiceImpl implements UserService {
 
     public User updateUserEmail(User user, String email){
         User updatedUser=userRepository.findById(user.getId()).get();
+        if(userRepository.findAllByEmail(email).size()>=1){
+            updatedUser.setPhone("");
+            userRepository.save(updatedUser);
+            return null;
+        }
         updatedUser.setEmail(email);
         userRepository.save(updatedUser);
         return updatedUser;

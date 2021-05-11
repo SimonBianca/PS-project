@@ -18,5 +18,6 @@ public interface AccountService {
     List<Account> findAll();
     Account findById(String id);
     Account addAppointment(Account account, Appointment appointment);
+    Account findByAppointmentsContaining(Appointment appointment);
 
 }
