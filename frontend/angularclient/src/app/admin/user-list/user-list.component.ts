@@ -9,7 +9,7 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UserListComponent implements OnInit {
   public accounts:Account[];
-
+  displayedColumns: string[] = ['username','firstName','lastName','email','phone','age','role'];
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {

@@ -19,6 +19,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {  MatButtonModule } from '@angular/material/button';
 import { ListOfServicesComponent } from './client/list-of-services/list-of-services.component';
 import { AccountDetailsComponent } from './common/account-details/account-details.component';
+import { AddAppointmentComponent } from './client/add-appointment/add-appointment.component';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import { AppHeaderComponent } from './common/app-header/app-header.component';
+import {MatTableModule} from '@angular/material/table';
+import { OldAppointmentsComponent } from './client/old-appointments/old-appointments.component';
+import { FutureAppointmentsComponent } from './client/future-appointments/future-appointments.component';
+import { OldAppointmetsListComponent } from './admin/old-appointmets-list/old-appointmets-list.component';
+import { FutureAppointmetsListComponent } from './admin/future-appointmets-list/future-appointmets-list.component';
+import { OnWaitingAppointmentsComponent } from './admin/on-waiting-appointments/on-waiting-appointments.component';
+import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointments-list/on-waiting-appointments-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +42,15 @@ import { AccountDetailsComponent } from './common/account-details/account-detail
     ServiceListComponent,
     AddServiceComponent,
     ListOfServicesComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    AddAppointmentComponent,
+    AppHeaderComponent,
+    OldAppointmentsComponent,
+    FutureAppointmentsComponent,
+    OldAppointmetsListComponent,
+    FutureAppointmetsListComponent,
+    OnWaitingAppointmentsComponent,
+    OnWaitingAppointmentsListComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +62,11 @@ import { AccountDetailsComponent } from './common/account-details/account-detail
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatTableModule
 
   ],
   providers: [],

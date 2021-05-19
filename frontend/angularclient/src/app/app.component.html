@@ -1,4 +1,4 @@
-<div class="logout-container">
-    <a class="logout" *ngIf="isUserLoggedIn" href="#" (click)="logout()">Logout</a>
+<div>
+    <app-app-header *ngIf="isUserLoggedIn"></app-app-header>
+    <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

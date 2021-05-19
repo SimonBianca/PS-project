@@ -2,9 +2,12 @@ package com.coafor.proiect.controller;
 
 
 import com.coafor.proiect.model.Account;
+import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
 import com.coafor.proiect.model.User;
+import com.coafor.proiect.repository.ServiceRepository;
 import com.coafor.proiect.service.AccountService;
+import com.coafor.proiect.service.AppointmentService;
 import com.coafor.proiect.service.ServiceService;
 import com.coafor.proiect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -26,6 +31,12 @@ public class AdminController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public ServiceRepository serviceRepository;
+
+    @Autowired
+    public AppointmentService appointmentService;
 
     @GetMapping("/accounts")
     public ResponseEntity getAllAccounts(){
@@ -113,6 +124,62 @@ public class AdminController {
         User usr=userService.updateUserAge(user,user.getAge());
         return ResponseEntity.ok().body(usr);
     }
+
+    @GetMapping("/old-appointments")
+    public ResponseEntity getOldAppointments() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.add(Calendar.DATE, -1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByStatusAndDateIsLessThan("ACCEPTED",date));
+    }
+
+    @GetMapping("/future-appointments")
+    public ResponseEntity getFutureAppointments(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByStatusAndDateGreaterThanEqual("ACCEPTED",date));
+    }
+
+    @PutMapping("/on-waiting-appointments/accept")
+    public ResponseEntity acceptAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.acceptAppointment(appointment);
+        return ResponseEntity.ok().body(app);
+    }
+
+    @PutMapping("/on-waiting-appointments/refuse")
+    public ResponseEntity refuseAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.refuseAppointment(appointment);
+        return ResponseEntity.ok().body(app);
+    }
+
+    @GetMapping("/on-waiting-appointments")
+    public ResponseEntity getOnWaintingAppointments(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByStatusAndDateGreaterThanEqual("WAITING",date));
+    }
+
+    @PutMapping("/appointment/account")
+    public ResponseEntity getAppointmentAccount(@RequestBody Appointment appointment){
+        Account account=accountService.findByAppointmentsContaining(appointment);
+        return ResponseEntity.ok().body(account);
+    }
+
+
 
 
 }

@@ -1,0 +1,43 @@
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 8vh;
+    font-family: SourceSansPro-Bold;
+    line-height: 1.2;
+    text-align: middle;
+    background: #cd8c90
+}
+
+.loggo-box {
+    padding-top: 2px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.loggo {
+    font-family: Freestyle Script;
+    font-size: 50px;
+    color: rgb(48, 24, 11);
+    padding-left: 600px;
+}
+
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    padding-top: 13px;
+    padding-right: 30px;
+    font-size: 14px;
+}
+
+.padding-right {
+    padding-right: 3px;
+}
+
+.account-button {
+    height: 30px;
+    font-size: 18px;
+    padding-right: 2px;
+}

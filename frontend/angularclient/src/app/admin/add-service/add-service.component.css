@@ -1,9 +1,11 @@
 .add-service-container {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
+    padding-top: 80px;
     border-color: rgb(195, 159, 144);
     width: 100%;
+    height: 66vh;
+    background-image: url('../../../assets/appointment.jpg');
     padding-bottom: 120px;
     background-size: cover;
     text-align: center;
@@ -22,8 +24,10 @@
 .add-service-box {
     justify-content: center;
     font-family: SourceSansPro-Bold;
-    min-width: 500px;
-    background: rgba(253, 250, 250, 0.945);
+    min-width: 300px;
+    min-height: 100px;
+    height: 40vh;
+    background: rgb(253, 250, 250);
     border-radius: 10px;
     box-shadow: 0 3px 20px 0 rgba(187, 61, 61, 0.1);
     padding-right: 40px;
@@ -60,8 +64,12 @@
     width: 100px;
     height: 40px;
     font-size: 20px;
-    background: rgb(247, 231, 223);
+    background: rgb(213 152 162);
     border: rgb(241, 215, 203);
     border-radius: 5px;
     outline:none;
+}
+
+.pt2{
+    padding-top: 15px;
 }

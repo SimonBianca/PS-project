@@ -1,41 +1,73 @@
-<div class="card my-5">
-    <div class="card-body center-container pt">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Password</th>
-            <th scope="col">FirstName</th>
-            <th scope="col">LastName</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Age</th>
-          </tr>
-        </thead>
-        <tbody>
-            <td>
-              <input [(ngModel)]="account.username" (change)="updateUsername(account)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.password" (change)="updatePassword(account)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.user.firstName" (change)="updateFirstName(account.user)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.user.lastName" (change)="updateLastName(account.user)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.user.email" (change)="updateEmail(account.user)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.user.phone" (change)="updatePhone(account.user)"/>
-            </td>
-            <td>
-              <input [(ngModel)]="account.user.age" (change)="updateAge(account.user)"/>
-            </td>
-            <!--<td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>-->
-        </tbody>
-      </table>
-    </div>
+<div class="create-account-container">
+  <div class="create-account-box">
+    <span class="title">
+      Account details
+    </span>
+      <div>
+          <form [formGroup]="accountForm" *ngIf="this.accountForm">
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Username </mat-label>
+                      <input (change)="updateUsername()" matInput formControlName="username" required>
+                  </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Password </mat-label>
+                      <input (change)="updatePassword()" matInput formControlName="password" required>
+                      <div *ngIf="accountForm.controls['password'].invalid && (accountForm.controls['password'].dirty || accountForm.controls['password'].touched)" class="alert alert-danger err">
+                        <div *ngIf="accountForm.controls['password'].errors.minlength">
+                          Password must be at least 8 characters long.
+                        </div>
+                      </div>
+                    </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>FirstName </mat-label>
+                      <input (change)="updateFirstName()" matInput formControlName="firstName" required>
+                  </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>LastName </mat-label>
+                      <input (change)="updateLastName()" matInput formControlName="lastName" required>
+                  </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Email </mat-label>
+                      <input (change)="updateEmail()" matInput formControlName="email" placeholder="example: example@yahoo.com" matInput type="text" required>
+                      <div *ngIf="accountForm.controls['email'].invalid && (accountForm.controls['email'].dirty || accountForm.controls['email'].touched)" class="alert alert-danger err">
+                        <div *ngIf="accountForm.controls['email'].errors.pattern">
+                          Email must be a valid email address.
+                        </div>
+                      </div>
+                    </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Phone </mat-label>
+                      <input (change)="updatePhone()" matInput formControlName="phone" placeholder="example: 0740123456" required>
+                      <div *ngIf="accountForm.controls['phone'].invalid && (accountForm.controls['phone'].dirty || accountForm.controls['phone'].touched)" class="alert alert-danger err">
+                        <div *ngIf="accountForm.controls['phone'].errors.pattern">
+                          Phone must be a valid phone number.
+                        </div>
+                      </div>
+                  </mat-form-field> 
+              </div>
+              <div class="input-container">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Age </mat-label>
+                      <input (change)="updateAge()" matInput formControlName="age" required>
+                      <div *ngIf="accountForm.controls['age'].invalid && (accountForm.controls['age'].dirty || accountForm.controls['age'].touched)" class="alert alert-danger err">
+                        <div *ngIf="accountForm.controls['age'].errors.pattern">
+                            Age must be a number between 10 and 99.
+                        </div>
+                      </div>
+                  </mat-form-field> 
+              </div>
+          </form>
+      </div>
   </div>
+</div>

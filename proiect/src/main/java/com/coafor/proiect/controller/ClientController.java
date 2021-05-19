@@ -1,9 +1,11 @@
 package com.coafor.proiect.controller;
 
 import com.coafor.proiect.model.Account;
+import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
 import com.coafor.proiect.model.User;
 import com.coafor.proiect.service.AccountService;
+import com.coafor.proiect.service.AppointmentService;
 import com.coafor.proiect.service.ServiceService;
 import com.coafor.proiect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -25,6 +31,9 @@ public class ClientController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public AppointmentService appointmentService;
 
     @GetMapping("/services")
     public ResponseEntity getAllServices(){
@@ -78,4 +87,63 @@ public class ClientController {
         User usr=userService.updateUserAge(user,user.getAge());
         return ResponseEntity.ok().body(usr);
     }
+
+    @PostMapping("/appointment")
+    public ResponseEntity addAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.addAppointment(appointment.getDate(),appointment.getAccount(),appointment.getServices());
+        return ResponseEntity.ok().body(app);
+    }
+
+    @GetMapping("/old-appointments")
+    public ResponseEntity getOldAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsLessThanAndStatus(account,date,status));
+    }
+
+    @GetMapping("/future-appointments")
+    public ResponseEntity getFutureAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsGreaterThanEqualAndStatus(account,date,status));
+    }
+
+    @GetMapping("/on-waiting-appointments")
+    public ResponseEntity getoOnWaitingAppointments(@RequestParam String id, String status){
+        Account account=accountService.findById(id);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.add(Calendar.DATE,-1);
+        Date date = cal.getTime();
+        return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByAccountAndDateIsGreaterThanEqualAndStatus(account,date,status));
+    }
+
+    @PutMapping("/on-waiting-appointments/accept")
+    public ResponseEntity acceptAppointment(@RequestBody Appointment appointment) throws ParseException {
+        Appointment app=appointmentService.acceptAppointment(appointment);
+        return ResponseEntity.ok().body(app);
+    }
+
+    @PutMapping("/on-waiting-appointments/refuse")
+    public ResponseEntity refuseAppointment(@RequestBody Appointment appointment){
+        Appointment app=appointmentService.refuseAppointment(appointment);
+        return ResponseEntity.ok().body(app);
+    }
+
+
 }

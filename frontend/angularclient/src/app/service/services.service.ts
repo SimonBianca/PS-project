@@ -46,5 +46,25 @@ export class ServicesService {
     return this.http.delete(`${this.baseURLAdmin}/services/delete/`+id);
   }
 
+  getServiceByName(services:Service[],name:string):Service{
+    var selectedItem=null;
+    services.forEach(function(item){
+      if(item.name==name){
+        selectedItem=item;
+      }
+    });
+    return selectedItem;
+  }
+
+  getNumberOfServicesByName(services:Service[],name:string):number{
+    var nr=0;
+    services.forEach(function(item){
+      if(item.name==name){
+        nr=nr+1;
+      }
+    });
+    return nr;
+  }
+
 }
 

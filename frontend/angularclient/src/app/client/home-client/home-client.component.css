@@ -1,0 +1,45 @@
+.main-container{
+    display:flex;
+}
+.left-container{
+    display:block;
+    padding-top: 50px;
+    padding-bottom: 150px;
+    padding-left: 25px;
+    width: 15%;
+    height: 69vh;
+    background: #e2d5d045
+}
+
+.right-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 150px;
+    width: 95%;
+    height: 60vh;
+    background-image: url('../../../assets/client.jpg');
+    background-size: cover;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.button-style{
+    font-family: Freestyle Script;
+    font-size: 27px;
+    background:#e2d5d045;
+    width: 180px;
+    height: 50px;
+    border-radius: 5px;
+    outline:none;
+}
+
+.button-style:hover {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+.pb{
+    padding-bottom: 25px;
+    padding-left: 10px;
+}

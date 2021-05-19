@@ -1,10 +1,12 @@
 package com.coafor.proiect.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,7 +19,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime date;
+    private Date date;
 
     @JsonBackReference
     @ManyToOne
@@ -25,5 +27,7 @@ public class Appointment {
 
     @OneToMany
     private List<Service> services;
+
+    private String status="WAITING";
 
 }

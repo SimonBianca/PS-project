@@ -1,9 +1,6 @@
 package com.coafor.proiect.service.impl;
 
-import com.coafor.proiect.model.Account;
-import com.coafor.proiect.model.Admin;
-import com.coafor.proiect.model.Client;
-import com.coafor.proiect.model.User;
+import com.coafor.proiect.model.*;
 import com.coafor.proiect.repository.AccountRepository;
 import com.coafor.proiect.repository.AdminRepository;
 import com.coafor.proiect.repository.ClientRepository;
@@ -31,8 +28,9 @@ public class AccountServiceImpl implements AccountService {
 
     public Account addClientAccount(String username, String password, String firstName,String lastName,int age, String phone, String email){
         User user=userRepository.findUserByEmail(email);
+        User user2=userRepository.findUserByPhone(phone);
         Account acc=accountRepository.findFirstByUsername(username);
-        if(user==null && acc==null){
+        if(user==null && acc==null && user2==null ){
             Client client=new Client(firstName,lastName,age,phone,email);
             client=clientRepository.save(client);
             Account account=new Account(null,username,password,client,null);
@@ -47,7 +45,8 @@ public class AccountServiceImpl implements AccountService {
     public Account addAdminAccount(String username, String password, String firstName,String lastName,int age, String phone, String email) {
         User user=userRepository.findUserByEmail(email);
         Account acc=accountRepository.findFirstByUsername(username);
-        if(user==null && acc==null) {
+        User user2=userRepository.findUserByPhone(phone);
+        if(user==null && acc==null && user2==null) {
             Admin admin = new Admin(firstName, lastName, age, phone, email);
             admin = adminRepository.save(admin);
             Account account = new Account(null, username, password, admin, null);
@@ -61,6 +60,11 @@ public class AccountServiceImpl implements AccountService {
 
     public Account updateUsername(Account account,String username){
         Account updatedAccount=accountRepository.findById(account.getId()).get();
+        if(accountRepository.findAllByUsername(username).size()>=1){
+            updatedAccount.setUsername("");
+            accountRepository.save(updatedAccount);
+            return null;
+        }
         updatedAccount.setUsername(username);
         return accountRepository.save(updatedAccount);
     }
@@ -94,5 +98,18 @@ public class AccountServiceImpl implements AccountService {
         Long toLong=Long.parseLong(id);
         return accountRepository.findFirstById(toLong);
     }
+
+    public Account addAppointment(Account account, Appointment appointment){
+        List<Appointment> appointments=account.getAppointments();
+        appointments.add(appointment);
+        account.setAppointments(appointments);
+        return accountRepository.save(account);
+    }
+
+    public Account findByAppointmentsContaining(Appointment appointment){
+        return (Account) accountRepository.findByAppointmentsContaining(appointment);
+    }
+
+
 
 }

@@ -1,11 +1,24 @@
 <div class="home-admin-container">
-    <div class="pr">
-        <button type="button" class="btn btn-info" (click)="goToAccountList()">List of accounts</button>
+    <div class="left-container">
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToServiceList()">Services</button>
+        </div>
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToAccountDetails()">Account details</button>
+        </div>
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToAccountList()">Accounts</button>
+        </div>
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToOldAppointments()">Old appointments</button>
+        </div>
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToOnWaitingAppointments()">On waiting appointments</button>
+        </div>
+        <div class="d-flex justify-content-center mt-0 pb">
+            <button type="button" class="button-style" (click)="goToFutureAppointments()">Future appointments</button>
+        </div>
     </div>
-    <div class="pr">
-        <button type="button" class="btn btn-info" (click)="goToServiceList()">List of services</button>
-    </div>
-    <div class="pr">
-        <button type="button" class="btn btn-info" (click)="goToAccountDetails()">Account details</button>
+    <div class ="right-container">
     </div>
 </div>
