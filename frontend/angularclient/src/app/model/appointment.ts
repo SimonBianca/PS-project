@@ -7,5 +7,6 @@ export class Appointment {
     account: Account;
     services: Service[];
     status:string;
+    accountUsername:string;
 
 }

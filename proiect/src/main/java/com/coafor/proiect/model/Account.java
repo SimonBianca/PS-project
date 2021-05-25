@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @Entity
@@ -15,12 +16,14 @@ import java.util.List;
 @Setter
 @Getter
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(unique = true)
     private String username;
+
     private String password;
 
     @JsonManagedReference

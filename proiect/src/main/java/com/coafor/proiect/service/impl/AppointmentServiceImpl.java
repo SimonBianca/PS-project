@@ -1,5 +1,6 @@
 package com.coafor.proiect.service.impl;
 
+import com.coafor.proiect.dto.AppointmentsBetweenDatesDTO;
 import com.coafor.proiect.model.Account;
 import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
@@ -62,6 +63,32 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointmentRepository.save(item);
             }
         }
+        Collections.sort(appointments, new Comparator<Appointment>() {
+            @Override
+            public int compare(Appointment a1, Appointment a2) {
+                return a1.getDate().compareTo(a2.getDate());
+            }
+        });
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> findAllByDateAndStatus(Date date, String status) {
+        List<Appointment> appointments=appointmentRepository.findAllByDateAndStatus(date,status);
+        Collections.sort(appointments, new Comparator<Appointment>() {
+            @Override
+            public int compare(Appointment a1, Appointment a2) {
+                return a1.getDate().compareTo(a2.getDate());
+            }
+        });
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> findAllByStatusAndDateBetween(String status, AppointmentsBetweenDatesDTO dto) {
+        Date startDate=dto.getStartDate();
+        Date endDate=dto.getEndDate();
+        List<Appointment> appointments=appointmentRepository.findAllByStatusAndDateBetween(status,startDate,endDate);
         Collections.sort(appointments, new Comparator<Appointment>() {
             @Override
             public int compare(Appointment a1, Appointment a2) {
@@ -151,6 +178,12 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointmentRepository.save(item);
             }
         }
+        Collections.sort(appointments, new Comparator<Appointment>() {
+            @Override
+            public int compare(Appointment a1, Appointment a2) {
+                return a1.getDate().compareTo(a2.getDate());
+            }
+        });
         return appointments;
     }
 
@@ -162,6 +195,12 @@ public class AppointmentServiceImpl implements AppointmentService {
             item.setAccount(account);
             appointmentRepository.save(item);
         }
+        Collections.sort(appointments, new Comparator<Appointment>() {
+            @Override
+            public int compare(Appointment a1, Appointment a2) {
+                return a1.getDate().compareTo(a2.getDate());
+            }
+        });
         return appointments;
     }
 

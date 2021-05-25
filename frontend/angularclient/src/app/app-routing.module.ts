@@ -17,6 +17,10 @@ import { OldAppointmetsListComponent } from './admin/old-appointmets-list/old-ap
 import { FutureAppointmetsListComponent } from './admin/future-appointmets-list/future-appointmets-list.component';
 import { OnWaitingAppointmentsComponent } from './admin/on-waiting-appointments/on-waiting-appointments.component';
 import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointments-list/on-waiting-appointments-list.component';
+import { AppointmentsComponent } from './admin/appointments/appointments.component';
+import { AppointmentsByClientComponent } from './admin/appointments-by-client/appointments-by-client.component';
+import { AppointmentsByDateComponent } from './admin/appointments-by-date/appointments-by-date.component';
+import { AppointmentsByDatesComponent } from './admin/appointments-by-dates/appointments-by-dates.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/login',pathMatch:'full'},
@@ -36,7 +40,11 @@ const routes: Routes = [
   {path:'admin/old-appointments',component:OldAppointmetsListComponent,canActivate:[AuthGuard]},
   {path:'admin/future-appointments',component:FutureAppointmetsListComponent,canActivate:[AuthGuard]},
   {path:'admin/on-waiting-appointments',component:OnWaitingAppointmentsComponent,canActivate:[AuthGuard]},
-  {path:'client/on-waiting-appointments',component:OnWaitingAppointmentsListComponent,canActivate:[AuthGuard]}
+  {path:'client/on-waiting-appointments',component:OnWaitingAppointmentsListComponent,canActivate:[AuthGuard]},
+  {path:'admin/appointments',component:AppointmentsComponent,canActivate:[AuthGuard]},
+  {path:'admin/appointments/client',component:AppointmentsByClientComponent,canActivate:[AuthGuard]},
+  {path:'admin/appointments/date',component:AppointmentsByDateComponent,canActivate:[AuthGuard]},
+  {path:'admin/appointments/between-dates',component:AppointmentsByDatesComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

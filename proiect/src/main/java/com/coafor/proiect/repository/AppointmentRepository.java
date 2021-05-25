@@ -22,4 +22,6 @@ public interface AppointmentRepository extends CrudRepository<Appointment,Long> 
     List<Appointment> findAllByStatusAndDateLessThan(String status,Date date);
     List<Appointment> findAllByAccountAndStatusAndDateGreaterThanEqual(Account account,String status,Date date);
     List<Appointment> findAllByAccountAndStatusAndDateLessThan(Account account,String status,Date date);
+    List<Appointment> findAllByDateAndStatus(Date date,String status);
+    List<Appointment> findAllByStatusAndDateBetween(String status,Date startDate,Date endDate);
 }

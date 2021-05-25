@@ -59,6 +59,10 @@ export class HomeAdminComponent implements OnInit {
     this.router.navigate(["admin/on-waiting-appointments"]);
   }
 
+  goToAppointments():void{
+    this.router.navigate(["admin/appointments"]);
+  }
+
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     localStorage.removeItem('token');

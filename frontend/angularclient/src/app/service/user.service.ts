@@ -162,6 +162,29 @@ export class UserService {
   getAppointmentAccount(appointment:Appointment):Observable<Account>{
       return this.http.put<Account>(`${this.baseURLAdmin}/appointment/account`,appointment);
   }
+
+  getAppointmentsByClient(username:string):Observable<Appointment[]>{
+    return this.http.put<Appointment[]>(`${this.baseURLAdmin}/appointments/client`,username);
+  }
+
+  getClientAccount(username:string):Observable<Account>{
+    return this.http.put<Account>(`${this.baseURLAdmin}/client-account`,username);
+  }
+
+  getAppointmentsByDate(date:Date):Observable<Appointment[]>{
+    return this.http.put<Appointment[]>(`${this.baseURLAdmin}/appointments/date`,date);
+  }
+
+  getAppointmentsByDates(startDate:Date,endDate:Date):Observable<Appointment[]>{
+    return this.http.put<Appointment[]>(`${this.baseURLAdmin}/appointments/between-dates`,{startDate:startDate,endDate:endDate});
+  }
+
+  exportOldAppointments(id:string){
+    let params=new HttpParams().set('id',id);
+    return this.http.get(`${this.baseURLClient}/export-appointments`,{params:params, responseType:'text'})
+  }
+
+  
   
 
 

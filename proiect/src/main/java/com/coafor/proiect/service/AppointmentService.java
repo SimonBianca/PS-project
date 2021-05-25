@@ -1,5 +1,6 @@
 package com.coafor.proiect.service;
 
+import com.coafor.proiect.dto.AppointmentsBetweenDatesDTO;
 import com.coafor.proiect.model.Account;
 import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
@@ -24,4 +25,6 @@ public interface AppointmentService {
     List<Appointment> findAllByAccountAndDateIsGreaterThanEqualAndStatus(Account account, Date date,String status);
     List<Appointment> findAllByStatusAndDateIsLessThan(String status, Date date);
     List<Appointment> findAllByAccountAndDateIsLessThanAndStatus(Account account, Date date,String status);
+    List<Appointment> findAllByDateAndStatus(Date date,String status);
+    List<Appointment> findAllByStatusAndDateBetween(String status, AppointmentsBetweenDatesDTO dto);
 }
