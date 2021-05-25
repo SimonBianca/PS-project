@@ -19,5 +19,7 @@ public interface AccountService {
     Account findById(String id);
     Account addAppointment(Account account, Appointment appointment);
     Account findByAppointmentsContaining(Appointment appointment);
+    List<Appointment> getAppointmentsByUsername(String username);
+    String exportOldAppointments(String accountID);
 
 }

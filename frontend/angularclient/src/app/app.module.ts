@@ -31,6 +31,10 @@ import { OldAppointmetsListComponent } from './admin/old-appointmets-list/old-ap
 import { FutureAppointmetsListComponent } from './admin/future-appointmets-list/future-appointmets-list.component';
 import { OnWaitingAppointmentsComponent } from './admin/on-waiting-appointments/on-waiting-appointments.component';
 import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointments-list/on-waiting-appointments-list.component';
+import { AppointmentsComponent } from './admin/appointments/appointments.component';
+import { AppointmentsByClientComponent } from './admin/appointments-by-client/appointments-by-client.component';
+import { AppointmentsByDateComponent } from './admin/appointments-by-date/appointments-by-date.component';
+import { AppointmentsByDatesComponent } from './admin/appointments-by-dates/appointments-by-dates.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +54,12 @@ import { OnWaitingAppointmentsListComponent } from './client/on-waiting-appointm
     OldAppointmetsListComponent,
     FutureAppointmetsListComponent,
     OnWaitingAppointmentsComponent,
-    OnWaitingAppointmentsListComponent
+    OnWaitingAppointmentsListComponent,
+    AppointmentsComponent,
+    AppointmentsByClientComponent,
+    AppointmentsByDateComponent,
+    AppointmentsByDatesComponent
+
   ],
   imports: [
     BrowserModule,

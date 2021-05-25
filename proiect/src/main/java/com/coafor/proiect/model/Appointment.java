@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.xml.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
@@ -14,20 +14,25 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlTransient
     private Long id;
 
     private Date date;
 
     @JsonBackReference
     @ManyToOne
+    @XmlTransient
     private Account account;
 
     @OneToMany
+    @XmlElementWrapper(name="list-of-services")
+    @XmlElement(name="service")
     private List<Service> services;
 
-    private String status="WAITING";
+    private String status;
 
 }

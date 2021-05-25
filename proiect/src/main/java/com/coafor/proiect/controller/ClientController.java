@@ -145,5 +145,10 @@ public class ClientController {
         return ResponseEntity.ok().body(app);
     }
 
+    @GetMapping("/export-appointments")
+    public ResponseEntity exportOwnerCarDetails(@RequestParam String id){
+        return ResponseEntity.ok(accountService.exportOldAppointments(id));
+    }
+
 
 }

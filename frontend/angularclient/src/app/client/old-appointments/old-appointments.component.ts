@@ -3,6 +3,7 @@ import { Account } from 'src/app/model/account';
 import { Appointment } from 'src/app/model/appointment';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-old-appointments',
@@ -24,6 +25,16 @@ export class OldAppointmentsComponent implements OnInit {
       console.log(error);
       this.appointments=[];
      } );
+  }
+
+  exportData(){
+    this.userService.exportOldAppointments(localStorage.getItem('id')).subscribe(res=>{
+      if(res){
+        let typeForBlob='text/xml;charset=utf-8';
+        let blob=new Blob([res],{type:typeForBlob});
+        saveAs(blob,"old-appointments.xml");
+      }
+    })
   }
 
 }

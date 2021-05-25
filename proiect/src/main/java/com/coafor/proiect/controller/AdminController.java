@@ -1,6 +1,7 @@
 package com.coafor.proiect.controller;
 
 
+import com.coafor.proiect.dto.AppointmentsBetweenDatesDTO;
 import com.coafor.proiect.model.Account;
 import com.coafor.proiect.model.Appointment;
 import com.coafor.proiect.model.Service;
@@ -177,6 +178,30 @@ public class AdminController {
     public ResponseEntity getAppointmentAccount(@RequestBody Appointment appointment){
         Account account=accountService.findByAppointmentsContaining(appointment);
         return ResponseEntity.ok().body(account);
+    }
+
+    @PutMapping("appointments/client")
+    public ResponseEntity getAppointmentsByUsername(@RequestBody String username){
+        List<Appointment> appointments=accountService.getAppointmentsByUsername(username);
+        return ResponseEntity.ok().body(appointments);
+    }
+
+    @PutMapping("client-account")
+    public ResponseEntity getClientAccount(@RequestBody String username){
+        Account account=accountService.findByUsername(username);
+        return ResponseEntity.ok().body(account);
+    }
+
+    @PutMapping("appointments/date")
+    public ResponseEntity getAppointmentsByDate(@RequestBody Date date){
+        List<Appointment> appointments=appointmentService.findAllByDateAndStatus(date,"ACCEPTED");
+        return ResponseEntity.ok().body(appointments);
+    }
+
+    @PutMapping("appointments/between-dates")
+    public ResponseEntity getAppointmentsByDates(@RequestBody AppointmentsBetweenDatesDTO dto){
+        List<Appointment> appointments=appointmentService.findAllByStatusAndDateBetween("ACCEPTED",dto);
+        return ResponseEntity.ok().body(appointments);
     }
 
 

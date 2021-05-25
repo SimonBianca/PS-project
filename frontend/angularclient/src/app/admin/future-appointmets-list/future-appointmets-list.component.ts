@@ -24,7 +24,7 @@ export class FutureAppointmetsListComponent implements OnInit {
       this.appointments.forEach(element => {
         this.userService.getAppointmentAccount(element).subscribe(data=>{
           this.account=data;
-          element.account=this.account;
+          element.accountUsername=this.account.username;
         },
         error => {
           console.log(error);
